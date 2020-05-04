@@ -21,14 +21,11 @@ router.post('/', async (req, res) => {
         await contacts.save()
         res.redirect('/list')
     } catch (err) {
-        if (err.name === 'ValidationError') {
-            handleValidationError(err, req.body)
-            res.render('contacts/addOrEdit', {
-                viewTitle: "Add Contact",
-                contacts: req.body,
-                err
-            })
-        }
+        res.render('contacts/addOrEdit', {
+                    viewTitle: "Add Contact",
+                    contacts: req.body,
+                    err
+                })
      }
     
 })
@@ -38,20 +35,6 @@ router.get('/list', (req, res) => {
 })
 
 
-const handleValidationError = (err, body) => {
-    for (let field in err.errors) {
-        switch (err.errors[field].path) {
-            case 'fullName':
-                body['fullNameError'] = err.errors[field].message
-                break
-            case 'email':
-                body['emailError'] = err.errors[field].message
-                break
-            default:
-                break
-        }
-    }
-}
 
 
 
