@@ -30,8 +30,20 @@ router.post('/', async (req, res) => {
     
 })
 
-router.get('/list', (req, res) => {
-    res.render('contacts/contactsList')
+router.get('/list', async (req, res) => {
+    try {
+        await Contacts.find({}).sort({createdAt: -1}).lean().then(docs => {
+            res.render('contacts/contactsList', {
+                list: docs,
+                viewTitle: "Contact List"
+            })
+        })
+
+    } catch (err) {
+        console.log('Error in retrieving Contacts list :' + err);
+    }
+    
+    
 })
 
 

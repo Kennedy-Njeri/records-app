@@ -1,0 +1,32 @@
+
+<div style="margin-top: 2.5em">
+    <h2 class="ui teal image header">
+        <div class="content">
+            <p>{{viewTitle}}</p>
+        </div>
+    </h2>
+
+
+
+<table class="ui striped table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>E-mail</th>
+        <th>Mobile</th>
+        <th>City</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#each list}}
+    <tr>
+        <td>{{this.fullName}}</td>
+        <td>{{this.email}}</td>
+        <td>{{this.mobile}}</td>
+        <td>{{this.city}}</td>
+    </tr>
+    {{/each}}
+    </tbody>
+</table>
+
+</div>
