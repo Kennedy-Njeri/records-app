@@ -18,6 +18,7 @@
     </tr>
     </thead>
     <tbody>
+    {{# if list }}
     {{#each list}}
     <tr>
         <td>{{this.fullName}}</td>
@@ -26,6 +27,11 @@
         <td>{{this.city}}</td>
     </tr>
     {{/each}}
+    {{else}}
+        <tr>
+            <td>There is no data to show</td>
+        </tr>
+    {{/if}}
     </tbody>
 </table>
 
