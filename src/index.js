@@ -3,11 +3,16 @@ require('./db/mongoose')
 const contactsRouter = require('./routers/contacts')
 const path = require('path')
 const exphbs = require('express-handlebars')
+const bodyparser = require('body-parser')
 
 
 
 
 const app = express()
+app.use(bodyparser.urlencoded({
+    extended: true
+}))
+app.use(bodyparser.json())
 const port = process.env.PORT || 3000
 
 app.set('views', path.join(__dirname, '/views/'))
