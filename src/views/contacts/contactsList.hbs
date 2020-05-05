@@ -28,7 +28,7 @@
         <td>{{this.mobile}}</td>
         <td>{{this.city}}</td>
         <td><a href="/{{this._id}}"><i class="edit icon"></i></a> </td>
-        <td><a href=""><i class="trash icon"></i></a> </td>
+        <td><a href="/delete/{{this._id}}" onclick="return confirm('Are you sure to delete this record ?')"><i class="trash icon"></i></a> </td>
     </tr>
     {{/each}}
     {{else}}

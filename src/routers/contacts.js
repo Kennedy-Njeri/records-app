@@ -59,12 +59,8 @@ router.get('/list', async (req, res) => {
 
 const updateContact = async (req, res) => {
     try {
-        await Contacts.findByIdAndUpdate({ _id: req.body._id }, req.body, { new: true }).then(docs => {
-            res.render('contacts/addOrEdit', {
-                contacts: req.body,
-                viewTitle: "Update Contact"
-            })
-        })
+        await Contacts.findByIdAndUpdate({ _id: req.body._id }, req.body, { new: true })
+        res.redirect('/list')
     } catch (e) {
         console.log('Error during record update : ' + e);
     }
@@ -75,7 +71,6 @@ const updateContact = async (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
         await Contacts.findById(req.params.id).lean().then(docs => {
-            console.log(docs)
             res.render('contacts/addOrEdit', {
                 contacts: docs,
                 viewTitle: "Update Contact"
@@ -91,11 +86,10 @@ router.get('/:id', async (req, res) => {
 
 
 
-router.post('/delete/:id', async (req, res) => {
+router.get('/delete/:id', async (req, res) => {
     try {
         await Contacts.findByIdAndRemove(req.params.id)
-        res.render('contacts/contactsList')
-
+        res.redirect('/list')
     }  catch (e) {
         console.log('Error in contact delete :' + e)
     }
