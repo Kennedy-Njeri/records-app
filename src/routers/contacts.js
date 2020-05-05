@@ -12,6 +12,17 @@ router.get('/', (req, res) => {
 
 
 router.post('/', async (req, res) => {
+    if (req.body._id === '') {
+        await insertContact(req, res)
+    }
+    else {
+        await updateContact(req, res)
+    }
+});
+
+
+
+const insertContact = async (req, res) => {
     try {
         const contacts = new Contacts()
         contacts.fullName = req.body.fullName
@@ -28,7 +39,7 @@ router.post('/', async (req, res) => {
                 })
      }
     
-})
+}
 
 router.get('/list', async (req, res) => {
     try {
@@ -44,6 +55,50 @@ router.get('/list', async (req, res) => {
     }
     
     
+})
+
+const updateContact = async (req, res) => {
+    try {
+        await Contacts.findByIdAndUpdate({ _id: req.body._id }, req.body, { new: true }).then(docs => {
+            res.render('contacts/addOrEdit', {
+                contacts: req.body,
+                viewTitle: "Update Contact"
+            })
+        })
+    } catch (e) {
+        console.log('Error during record update : ' + e);
+    }
+   
+}
+
+
+router.get('/:id', async (req, res) => {
+    try {
+        await Contacts.findById(req.params.id).lean().then(docs => {
+            console.log(docs)
+            res.render('contacts/addOrEdit', {
+                contacts: docs,
+                viewTitle: "Update Contact"
+            })
+        })
+
+    } catch (e) {
+        console.log("The doc could not be found", e)
+    }
+
+})
+
+
+
+
+router.post('/delete/:id', async (req, res) => {
+    try {
+        await Contacts.findByIdAndRemove(req.params.id)
+        res.render('contacts/contactsList')
+
+    }  catch (e) {
+        console.log('Error in contact delete :' + e)
+    }
 })
 
 

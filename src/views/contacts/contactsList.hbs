@@ -15,6 +15,8 @@
         <th>E-mail</th>
         <th>Mobile</th>
         <th>City</th>
+        <th>Edit</th>
+        <th>Delete</th>
     </tr>
     </thead>
     <tbody>
@@ -25,6 +27,8 @@
         <td>{{this.email}}</td>
         <td>{{this.mobile}}</td>
         <td>{{this.city}}</td>
+        <td><a href="/{{this._id}}"><i class="edit icon"></i></a> </td>
+        <td><a href=""><i class="trash icon"></i></a> </td>
     </tr>
     {{/each}}
     {{else}}
@@ -36,7 +40,7 @@
     <tfoot class="full-width">
     <tr>
         <th></th>
-        <th colspan="4">
+        <th colspan="5">
             <a href="/">
             <div class="ui right floated small primary labeled icon button">
 
